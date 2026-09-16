@@ -3,10 +3,57 @@ Trabalho de Linguagem Técnica — RPG baseado em texto
 
 RPG — SoulsMar
 
----------- Alunos ----------
+/========== Alunos ==========\
+|                            |
+|  1 - Henrique L. Santana   |
+|                            |
+|  2 - João Vitor S. Varini  |
+|                            |
+| 3 - Matheus Marins         |     
+\____________________________/
 
-1 - Henrique L. Santana
+1. Apresentação do projeto
 
-2 - João Vitor S. Varini
+  Um RPG baseado em texto, utilizando a linguagem C. No jogo, o jogador poderá controlar um personagem, explorar diferentes ambientes, realizar ações, enfrentar desafios e tomar decisões que influenciam o desenvolvimento da "Run".
+  A proposta é criar uma experiência divertida e interativa, utilizando textos, imagens em ASCII(Somente em alguns detalhes), personagens e situações do jogo, contribuindo para a imersão do jogador. O sistema será baseado em interações textuais, nas quais o jogador deverá escolher suas ações por meio de opções apresentadas no terminal. Essas escolhas poderão envolver exploração, combates, utilização de itens e outras funcionalidades definidas pelo grupo.
 
-3 - Matheus Marins
+2. Dinâmica do jogo
+
+  A partida começa com a apresentação do menu principal, no qual o jogador poderá iniciar uma nova partida ou acessar outras opções disponíveis no sistema.
+  Durante o jogo, o jogador poderá explorar ambientes, interagir com situações, enfrentar adversários e realizar diferentes ações utilizando os recursos disponíveis para seu personagem. As escolhas realizadas poderão influenciar o desenvolvimento da partida, exigindo que o jogador analise as opções apresentadas e decida como prosseguir.
+  As imagens em ASCII serão utilizadas em momentos específicos para representar visualmente personagens, acontecimentos ou itens, complementando os textos e contribuindo para a experiência de jogo.
+
+3. Objetivo do projeto
+
+   O principal objetivo do projeto é desenvolver um RPG baseado em texto que permita aplicar, de forma prática, os conhecimentos de programação aprendidos na disciplina de Linguagem e Técnicas de Programação.
+   O projeto também busca estimular a criatividade, o raciocínio lógico e a resolução de problemas por meio da construção de um sistema interativo, utilizando os recursos da linguagem C.
+
+4. Principais sistemas
+
+O projeto contará com diferentes sistemas responsáveis pelo funcionamento do RPG:
+
+* Sistema de menu:
+    Permite ao jogador acessar as principais opções do jogo, como iniciar, continuar e encerrar uma partida.
+
+* Sistema de personagem:
+    Responsável pelas informações do personagem, como nome, atributos, nível e demais características definidas pelo grupo.
+
+* Sistema de exploração:
+    Permite ao jogador percorrer ambientes, escolher caminhos e participar de diferentes situações durante a partida.
+
+* Sistema de combate:
+    Controla os confrontos entre o personagem e os adversários, incluindo ações, ataques e resultados das batalhas.
+
+* Sistema de inventário:
+    Permite consultar e utilizar itens obtidos durante o jogo, conforme as regras definidas pelo grupo.
+
+* Sistema de progressão:
+    Controla a evolução do personagem, incluindo experiência, níveis e possíveis melhorias em seus atributos.
+
+* Sistema de representação em ASCII:
+    Apresenta imagens textuais de ambientes, personagens ou acontecimentos para auxiliar na imersão do jogador.
+
+* Sistema de salvamento:
+    Permite armazenar e recuperar informações da partida por meio de arquivos.
+
+  
