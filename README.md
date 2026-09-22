@@ -20,8 +20,7 @@ RPG — SoulsMar
 
 3. Objetivo do projeto
 
-   O principal objetivo do projeto é desenvolver um RPG baseado em texto que permita aplicar, de forma prática, os conhecimentos de programação aprendidos na disciplina de Linguagem e Técnicas de Programação.
-   O projeto também busca estimular a criatividade, o raciocínio lógico e a resolução de problemas por meio da construção de um sistema interativo, utilizando os recursos da linguagem C.
+  O principal objetivo do projeto é desenvolver um RPG baseado em texto que permita aplicar, de forma prática, os conhecimentos de programação aprendidos na disciplina de Linguagem e Técnicas de Programação. O projeto também busca estimular a criatividade, o raciocínio lógico e a resolução de problemas por meio da construção de um sistema interativo, utilizando os recursos da linguagem C.
 
 4. Principais sistemas
 
