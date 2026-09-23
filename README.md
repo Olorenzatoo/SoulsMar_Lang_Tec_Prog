@@ -50,4 +50,7 @@ O projeto contará com diferentes sistemas responsáveis pelo funcionamento do R
 * Sistema de salvamento:
     Permite armazenar e recuperar informações da partida por meio de arquivos.
 
-  
+5. Problemática e solução proposta
+
+O projeto aborda a questão da criação de um sistema de RPG que possa gerenciar diversos aspectos de uma partida de maneira estruturada e integrada. O jogo deverá gerenciar dados do personagem, exploração de cenários, batalhas, itens, evolução e salvamento do jogo. Para resolver essa questão, o projeto será segmentado em vários sistemas, cada um encarregado de uma função específica do jogo. Com isso, as funcionalidades poderão interagir, possibilitando que as ações do jogador afetem o progresso da partida. O uso da linguagem C permitirá que os conhecimentos adquiridos na disciplina sejam aplicados para desenvolver a lógica e o funcionamento desses sistemas.
+
