@@ -74,7 +74,7 @@ A modularização será aplicada para separar as funcionalidades do projeto em d
 8. Estrutura lógica e fluxograma
 A configuração lógica do projeto será estruturada com base nos sistemas mencionados anteriormente, possibilitando que o jogador navegue pelo menu, gerencie seu personagem, investigue os cenários, enfrente desafios e utilize as ferramentas disponíveis ao longo do jogo. O projeto incluirá um diagrama de fluxo que irá ilustrar de forma visual como funciona e a sequência lógica das ações principais do sistema.
 
-
+![Image Alt](https://github.com/joaovarini/teste/blob/main/FluxogramaJogoRPG.jpeg?raw=true)
 
 O diagrama de fluxo explicita o percurso que o programa pode seguir durante sua execução e as escolhas que o jogador terá a seu alcance.
 A disposição dos sistemas e do diagrama de fluxo servirá como fundamento para a criação do programa usando a linguagem C.
