@@ -54,3 +54,19 @@ O projeto contará com diferentes sistemas responsáveis pelo funcionamento do R
 
 O projeto aborda a questão da criação de um sistema de RPG que possa gerenciar diversos aspectos de uma partida de maneira estruturada e integrada. O jogo deverá gerenciar dados do personagem, exploração de cenários, batalhas, itens, evolução e salvamento do jogo. Para resolver essa questão, o projeto será segmentado em vários sistemas, cada um encarregado de uma função específica do jogo. Com isso, as funcionalidades poderão interagir, possibilitando que as ações do jogador afetem o progresso da partida. O uso da linguagem C permitirá que os conhecimentos adquiridos na disciplina sejam aplicados para desenvolver a lógica e o funcionamento desses sistemas.
 
+6. Condições de vitória e derrota
+
+As situações que levarão à vitória ou à derrota serão determinadas conforme as diretrizes estabelecidas para o RPG. 
+Durante o jogo, o jogador precisará executar ações e enfrentar uma variedade de obstáculos. Com base nas escolhas realizadas e nos resultados alcançados, o jogador poderá seguir em frente ou ver seu jogo chegar ao fim.
+Em batalhas, a vitória se dará quando o personagem conseguir derrotar o oponente, seguindo as normas acordadas pelo grupo.
+A derrota poderá acontecer se o personagem falhar em superar um desafio específico ou atingir um estado que conclua a partida.
+As regras particulares para vitória e derrota serão estabelecidas pelo grupo à medida que o jogo progride.
+
+7. Proposta acadêmica
+
+O RPG em texto será criado com a finalidade de aplicar na prática os conceitos abordados na disciplina de Linguagem e Técnicas de Programação de forma interativa.
+Durante a criação, conceitos como controle de fluxo, funções, arrays, cadeias de caracteres, estruturas, arquivos e modularização serão empregados.
+A entrada e saída de dados será utilizada para possibilitar que o jogador interaja com o sistema através do terminal. Estruturas condicionais serão empregadas para gerenciar decisões, escolhas e cenários do jogo, enquanto estruturas de repetição poderão ser aplicadas em menus, batalhas e outras situações que exijam repetição.
+Funções serão implementadas para sistematizar as diversas funcionalidades do projeto. Cadeias de caracteres serão utilizadas para dados textuais, enquanto arrays poderão ser usados para guardar conjuntos de informações.
+Estruturas (struct) serão utilizadas para organizar informações sobre personagens, inimigos e itens. Arquivos servirão para o sistema de salvamento e carregamento dos jogos.
+A modularização será aplicada para separar as funcionalidades do projeto em diferentes arquivos .c e .h, possibilitando uma melhor estruturação do sistema.
