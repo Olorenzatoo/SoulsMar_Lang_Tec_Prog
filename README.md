@@ -69,7 +69,7 @@ O RPG em texto será criado com a finalidade de aplicar na prática os conceitos
 Durante a criação, conceitos como controle de fluxo, funções, arrays, cadeias de caracteres, estruturas, arquivos e modularização serão empregados.
 A entrada e saída de dados será utilizada para possibilitar que o jogador interaja com o sistema através do terminal. Estruturas condicionais serão empregadas para gerenciar decisões, escolhas e cenários do jogo, enquanto estruturas de repetição poderão ser aplicadas em menus, batalhas e outras situações que exijam repetição.
 Funções serão implementadas para sistematizar as diversas funcionalidades do projeto. Cadeias de caracteres serão utilizadas para dados textuais, enquanto arrays poderão ser usados para guardar conjuntos de informações.
-Estruturas (struct) serão utilizadas para organizar informações sobre personagens, inimigos e itens. Arquivos servirão para o sistema de salvamento e carregamento dos jogos.
+Estruturas (struct) serão empregadas para sistematizar as informações das principais entidades do jogo, como heróis, adversários e objetos, reunindo dados pertinentes a cada item. Vetores podem ser usados para guardar coleções dessas informações, enquanto cadeias de caracteres servirão para dados escritos, como identificadores. Documentos serão utilizados para guardar e acessar os dados essenciais para a gravação e a restauração das partidas.
 A modularização será aplicada para separar as funcionalidades do projeto em diferentes arquivos .c e .h, possibilitando uma melhor estruturação do sistema.
 
 8. Estrutura lógica e fluxograma
