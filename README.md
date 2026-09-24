@@ -5,7 +5,7 @@ RPG — SoulsMar
                            
 1 - Henrique L. Santana   
 2 - João Vitor S. Varini  
-3 - Matheus Marins 
+3 - Matheus Marins
 4 - Pedro A. Rangel
 
 1. Apresentação do projeto
