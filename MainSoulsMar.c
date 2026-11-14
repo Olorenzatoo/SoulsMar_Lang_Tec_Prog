@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-
+#define MAX_ITENS 10
 
 typedef struct {
     char nome[40];
