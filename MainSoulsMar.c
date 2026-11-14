@@ -51,6 +51,7 @@ void criarPersonagem(Personagem *p);
 void exibirStatus(Personagem *p);
 
 void loopExploracao(Personagem *p);
+void exibirCreditos(void);
 //==================================================================================================
 int main(int argc, char *argv[]){
 
@@ -81,7 +82,8 @@ int main(int argc, char *argv[]){
             case 2:
           
             case 3:
-                
+                exibirCreditos();
+                break;
             case 0:
                 
         }
@@ -247,6 +249,22 @@ void loopExploracao(Personagem *p) {
                 return;
         }
     }
+}
 
-    
+void exibirCreditos(void) {
+    limparTela();
+    printf("==============================================================\n");
+    printf("  SOULSMAR - TRABALHO DE LINGUAGEM E TECNICAS DE PROGRAMACAO  \n");
+    printf("==============================================================\n\n");
+    printf("Integrantes do Grupo:\n");
+    printf("  1 - Henrique L. Santana\n");
+    printf("  2 - Joao Vitor S. Varini\n");
+    printf("  3 - Matheus Marins\n");
+    printf("  4 - Pedro A. Rangel\n");
+    printf("  5 - Guilherme Trepack\n\n");
+    printf("Sistemas Implementados:\n");
+    printf("  - Menu, Personagem, Exploracao, Combate por Turnos,\n");
+    printf("    Inventario, Progressao (XP/Nivel), Arte ASCII e Save Binario.\n");
+    printf("==============================================================\n");
+    pausar();
 }
