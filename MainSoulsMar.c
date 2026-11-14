@@ -48,8 +48,9 @@ void exibirArteVitoria(void);
 void exibirArteDerrota(void);
 
 void criarPersonagem(Personagem *p);
-int iniciarCombate(Personagem *p, Inimigo inimigo);
+void verificarProgressao(Personagem *p);
 
+int iniciarCombate(Personagem *p, Inimigo inimigo);
 void loopExploracao(Personagem *p);
 void explorarAvancar(Personagem *p);
 void exibirCreditos(void);
@@ -188,6 +189,39 @@ void criarPersonagem(Personagem *p) {
     pausar();
 }
 
+void verificarProgressao(Personagem *p) {
+    int escolha;
+
+    while (p->xp >= p->xpProximoNivel) {
+        p->xp -= p->xpProximoNivel;
+        p->nivel++;
+        p->xpProximoNivel = (int)(p->xpProximoNivel * 1.5);
+
+        limparTela();
+        printf("**********************************************\n");
+        printf("  SUBIU DE NIVEL! Agora voce e Nivel %d!\n", p->nivel);
+        printf("**********************************************\n");
+        printf("\nEscolha um atributo para fortalecer:\n");
+        printf("  [1] Vitalidade (+25 HP Maximo)\n");
+        printf("  [2] Forca      (+5 Ataque)\n");
+        printf("  [3] Resiliencia(+3 Defesa)\n");
+        printf("  [4] Tenacidade (+15 Vigor Maximo)\n");
+        printf("\nOpcao: ");
+
+        escolha = lerInteiro(1, 4);
+        switch (escolha) {
+            case 1: p->hpMax += 25; break;
+            case 2: p->ataque += 5; break;
+            case 3: p->defesa += 3; break;
+            case 4: p->vigorMax += 15; break;
+        }
+        p->hp = p->hpMax;
+        p->vigor = p->vigorMax;
+        printf("\nAtributo aprimorado e energias restauradas!\n");
+        pausar();
+    }
+}
+
 void exibirStatus(const Personagem *p) {
     limparTela();
     printf("==============================================\n");
@@ -312,10 +346,7 @@ void loopExploracao(Personagem *p) {
                 
                 break;
             case 4:
-                
-                break;
-            case 5:
-                
+                abrirInventario(p);
                 break;
             case 0:
                 return;
@@ -339,8 +370,8 @@ void explorarAvancar(Personagem *p) {
 
         if (p->areaAtual == 1) {
             printf("Voce encontra um altar submerso emanando uma nevoa escarlate.\n");
-            printf("[1] Tocar o altar (-15 HP, +35 Almas e +1 Frasco)\n");
-            printf("[2] Ignorar e seguir (+15 Almas)\nEscolha: ");
+            printf("[1] Tocar o altar\n");
+            printf("[2] Ignorar e seguir\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -356,8 +387,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 2) {
             printf("Um peregrino cego pede ajuda para suportar o frio da catedral.\n");
-            printf("[1] Ajudar o peregrino (+40 Almas e +2 Ataque)\n");
-            printf("[2] Seguir adiante (+15 Almas)\nEscolha: ");
+            printf("[1] Ajudar o peregrino\n");
+            printf("[2] Seguir adiante\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -371,8 +402,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 3) {
             printf("No topo do farol, uma reliquia antiga brilha cravada na pedra.\n");
-            printf("[1] Empunhar a reliquia (+50 Almas e +3 Defesa)\n");
-            printf("[2] Descansar um pouco (+20 HP)\nEscolha: ");
+            printf("[1] Empunhar a reliquia\n");
+            printf("[2] Descansar um pouco\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -400,6 +431,24 @@ void explorarAvancar(Personagem *p) {
 
 		
     }
+}
+
+void descansarFogueira(Personagem *p) {
+    limparTela();
+    exibirArteFogueira();
+
+    p->hp = p->hpMax;
+    p->vigor = p->vigorMax;
+
+    printf("Suas feridas foram fechadas e seu vigor foi totalmente restaurado!\n");
+    verificarProgressao(p);
+
+    if (salvarJogo(p)) {
+        printf("\n>> Progresso salvo com sucesso em '%s'!\n", SAVE_FILE);
+    } else {
+        printf("\n[!] Erro ao salvar o arquivo.\n");
+    }
+    pausar();
 }
 
 void exibirCreditos(void) {
