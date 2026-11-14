@@ -48,9 +48,10 @@ void exibirArteVitoria(void);
 void exibirArteDerrota(void);
 
 void criarPersonagem(Personagem *p);
-void exibirStatus(Personagem *p);
+int iniciarCombate(Personagem *p, Inimigo inimigo);
 
 void loopExploracao(Personagem *p);
+void explorarAvancar(Personagem *p);
 void exibirCreditos(void);
 //==================================================================================================
 int main(int argc, char *argv[]){
@@ -200,6 +201,78 @@ void exibirStatus(const Personagem *p) {
     printf("==============================================\n");
     pausar();
 }
+
+int iniciarCombate(Personagem *p, Inimigo inimigo) {
+    int acao, dano, defendendo;
+
+    while (p->hp > 0 && inimigo.hp > 0) {
+        defendendo = 0;
+        limparTela();
+        exibirArteInimigo(inimigo.tipoArte);
+
+        printf("INIMIGO: %s | HP: %d/%d\n", inimigo.nome, inimigo.hp, inimigo.hpMax);
+        printf("JOGADOR: %s | HP: %d/%d | Vigor: %d/%d\n\n", p->nome, p->hp, p->hpMax, p->vigor, p->vigorMax);
+
+        printf("[1] Ataque Rapido  (0 Vigor)\n");
+        printf("[2] Golpe Pesado   (15 Vigor - Dano extra)\n");
+        printf("[3] Defender       (Reduz dano e recupera 15 Vigor)\n");
+        printf("[4] Inventario\n");
+        printf("\nSua acao: ");
+        scanf("%d", &acao);
+        limparBuffer();
+
+        if (acao == 1) {
+            dano = p->ataque - (inimigo.defesa / 2) + (rand() % 4);
+            if (dano < 1) dano = 1;
+            inimigo.hp -= dano;
+            printf("\n>> Voce atacou e causou %d de dano!\n", dano);
+        } else if (acao == 2) {
+            if (p->vigor >= 15) {
+                p->vigor -= 15;
+                dano = (p->ataque + 8) - (inimigo.defesa / 2) + (rand() % 4);
+                if (dano < 1) dano = 1;
+                inimigo.hp -= dano;
+                printf("\n>> GOLPE PESADO! Voce causou %d de dano!\n", dano);
+            } else {
+                printf("\n[!] Vigor insuficiente! Voce perdeu o turno!\n");
+            }
+        } else if (acao == 3) {
+            defendendo = 1;
+            p->vigor += 15;
+            if (p->vigor > p->vigorMax) p->vigor = p->vigorMax;
+            printf("\n>> Voce ergueu a guarda e recuperou 15 de Vigor!\n");
+        } else if (acao == 4) {
+            abrirInventario(p);
+            continue;
+        } else {
+            printf("\nOpcao invalida! Voce hesitou e perdeu a vez.\n");
+        }
+
+        /* Verifica se o inimigo morreu */
+        if (inimigo.hp <= 0) {
+            printf("\n*** %s FOI DERROTADO! (+%d Almas) ***\n", inimigo.nome, inimigo.xpRecompensa);
+            p->xp += inimigo.xpRecompensa;
+
+            if (rand() % 100 < 50) {
+                printf("Voce encontrou um Frasco de Estus!\n");
+                adicionarItem(p, "Frasco de Estus", 1, 45, 1);
+            }
+            pausar();
+            return 1;
+        }
+
+        /* Turno do Inimigo */
+        dano = inimigo.ataque - (p->defesa / 2) + (rand() % 4);
+        if (defendendo) dano /= 2;
+        if (dano < 1) dano = 1;
+
+        p->hp -= dano;
+        printf("<< %s atacou e causou %d de dano em voce!\n", inimigo.nome, dano);
+        pausar();
+    }
+
+    return 0;
+}
 //==================================================================================================
 void loopExploracao(Personagem *p) {
     int opcao;
@@ -325,6 +398,7 @@ void explorarAvancar(Personagem *p) {
     Inimigo chefes[5] = {{"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, 
 	{"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}};
 
+		
     }
 }
 
