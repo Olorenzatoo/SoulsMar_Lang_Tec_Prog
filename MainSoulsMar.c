@@ -43,7 +43,16 @@ int main(int argc, char *argv[]){
     int opcao;
 
   do {
-    
+
+        printf("==============================================================\n");
+	    printf("   ____   ___  _   _ _     ____  __  __    _    ____          \n");
+	    printf("  / ___| / _ \\| | | | |   / ___||  \\/  |  / \\  |  _ \\         \n");
+	    printf("  \\___ \\| | | | | | | |   \\___ \\| |\\/| | / _ \\ | |_) |        \n");
+	    printf("   ___) | |_| | |_| | |___ ___) | |  | |/ ___ \\|  _ <         \n");
+	    printf("  |____/ \\___/ \\___/|_____|____/|_|  |_/_/   \\_\\_| \\_\\        \n");
+	    printf("             --- AS COSTAS CINZENTAS DO ABISMO ---            \n");
+	    printf("==============================================================\n\n");
+      
         printf("  [1] Nova Jornada (Novo Jogo)\n");
         printf("  [2] Continuar Jornada (Carregar Save)\n");
         printf("  [3] Sobre o Projeto & Creditos\n");
