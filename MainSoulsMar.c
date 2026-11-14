@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
+
 
 typedef struct {
     char nome[40];
@@ -15,7 +13,6 @@ typedef struct {
 
 typedef struct {
     char nome[50];
-    char classe[30];
     int nivel;
     int xp;
     int xpProximoNivel;
@@ -43,10 +40,15 @@ typedef struct {
 
 void limparTela(void);
 void pausar(void);
+void limparBuffer(void);
 int lerInteiro(int min, int max);
 
+void exibirArteFogueira(void);
+void exibirArteVitoria(void);
+void exibirArteDerrota(void);
 
-
+void criarPersonagem(Personagem *p);
+//==================================================================================================
 int main(int argc, char *argv[]){
 
     Personagem jogador;
@@ -70,7 +72,8 @@ int main(int argc, char *argv[]){
     
         switch (opcao) {
             case 1:
-                
+                criarPersonagem(&jogador);
+				break;
             case 2:
           
             case 3:
@@ -82,13 +85,18 @@ int main(int argc, char *argv[]){
 
   return 0;
 }
-
+//==================================================================================================
 void limparTela(void) {
 #ifdef _WIN32
     system("cls");
 #else
     system("clear");
 #endif
+}
+
+void limparBuffer(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 }
 
 void pausar(void) {
@@ -109,4 +117,67 @@ int lerInteiro(int min, int max) {
         }
         printf("Entrada invalida! Digite um numero entre %d e %d: ", min, max);
     }
+}
+//==================================================================================================
+void exibirArteFogueira(void) {
+    printf("\n        (  .      )\n");
+    printf("      )           (              )\n");
+    printf("            .  '   .   '  .  '  .\n");
+    printf("   (    , )       (.   )  (   ',    )\n");
+    printf("    .' ) ( . )    ,  ( ,     )   ( .\n");
+    printf(" ). , ( .   (  ) ( , ')  .' (  ,    )\n");
+    printf("(_,) . ), ) _) _,')  (, ) '. )  ,. (' )\n");
+    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
+    printf("     [ FOGUEIRA DAS ALMAS ACESA ]\n\n");
+}
+
+void exibirArteVitoria(void) {
+    printf("\n==============================================================\n");
+    printf("  __   _____ _____ ___  ____  ___    _                        \n");
+    printf("  \\ \\ / /_ _|_   _/ _ \\|  _ \\|_ _|  / \\                       \n");
+    printf("   \\ V / | |  | || | | | |_) || |  / _ \\                      \n");
+    printf("    \\_/ |___| |_||_| |_|_| \\_\\___|/_/ \\_\\                     \n");
+    printf("        A MALDICAO DE SOULSMAR FOI DISSIPADA!                 \n");
+    printf("==============================================================\n");
+}
+
+void exibirArteDerrota(void) {
+    printf("\n==============================================================\n");
+    printf("   __     _____   ____ _____   __  __  ___  ____  ____  _____ _   _ \n");
+    printf("   \\ \\   / / _ \\ / ___| ____| |  \\/  |/ _ \\|  _ \\|  _ \\| ____| | | |\n");
+    printf("    \\ \\ / / | | | |   |  _|   | |\\/| | | | | |_) | |_) |  _| | | | |\n");
+    printf("     \\ V /| |_| | |___| |___  | |  | | |_| |  _ <|  _ <| |___| |_| |\n");
+    printf("      \\_/  \\___/ \\____|_____| |_|  |_|\\___/|_| \\_\\_| \\_\\_____|\\___/ \n");
+    printf("            SUAS ALMAS SE PERDERAM NAS PROFUNDEZAS...               \n");
+    printf("==============================================================\n");
+}
+//==================================================================================================
+void criarPersonagem(Personagem *p) {
+    limparTela();
+    printf("=== CRIACAO DO PERSONAGEM ===\n\n");
+    printf("Digite o nome do seu viajante: ");
+    scanf(" %49[^\n]", p->nome);
+    limparBuffer();
+
+    p->nivel = 1;
+    p->xp = 0;
+    p->xpProximoNivel = 50;
+    p->hpMax = 110;
+    p->vigorMax = 50;
+    p->ataque = 18;
+    p->defesa = 8;
+    p->hp = p->hpMax;
+    p->vigor = p->vigorMax;
+
+    p->areaAtual = 1;
+    p->progressoArea = 0;
+    p->numItens = 0;
+
+    adicionarItem(p, "Frasco de Estus", 1, 45, 2);
+    adicionarItem(p, "Erva Marinha", 2, 25, 1);
+
+    limparTela();
+    printf("\nBem-vindo a SoulsMar, %s!\n", p->nome);
+    printf("Seu objetivo: atravessar as 4 regioes e derrotar Vorath.\n");
+    pausar();
 }
