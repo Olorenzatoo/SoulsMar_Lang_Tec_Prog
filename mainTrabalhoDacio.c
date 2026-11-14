@@ -21,7 +21,7 @@ int lerOpcao(int min, int max);
 void pausar(void);
 void mostrarStatus(const Personagem *p);
 void mostrarArte(int etapa);
-void explorar(Personagem *p);
+void explorar(Personagem *p, int etapa);
 int combater(Personagem *p, Inimigo inimigo);
 int salvar(const Personagem *p, int etapa);
 int carregar(Personagem *p, int *etapa);
@@ -88,21 +88,66 @@ void mostrarArte(int etapa) {
     }
 }
 
-void explorar(Personagem *p) {
-    int evento = rand() % 3;
+void explorar(Personagem *p, int etapa) {
+    int evento;
+    int chanceMonstro = 0;
+
+    if (etapa == 3) chanceMonstro = 20;
+    else if (etapa == 4) chanceMonstro = 35;
+    else if (etapa >= 5) chanceMonstro = 50;
+
     printf("\nVoce examina o local com cuidado...\n");
+
+    if (chanceMonstro > 0 && rand() % 100 < chanceMonstro) {
+        const char *nomes[TOTAL_ETAPAS] = {
+            "Lobo das Sombras", "Sentinela Enferrujado",
+            "Aranha das Profundezas", "Cavaleiro Corrompido",
+            "Guardiao de SoulsMar"
+        };
+
+        const int vidas[TOTAL_ETAPAS] = {32, 43, 52, 65, 90};
+        const int forcas[TOTAL_ETAPAS] = {6, 7, 8, 10, 12};
+        const int xp[TOTAL_ETAPAS] = {10, 12, 15, 18, 30};
+
+        Inimigo inimigo;
+
+        printf("\n!!! VOCE FOI SURPREENDIDO POR UM MONSTRO! !!!\n");
+
+        strcpy(inimigo.nome, nomes[etapa - 1]);
+        inimigo.vida = vidas[etapa - 1];
+        inimigo.forca = forcas[etapa - 1];
+        inimigo.recompensa = xp[etapa - 1];
+
+        if (!combater(p, inimigo)) {
+            printf("\nA exploracao terminou em derrota...\n");
+            p->vida = 0;
+        }
+
+        return;
+    }
+
+    evento = rand() % 3;
+
     if (evento == 0) {
         int cura = 12 + rand() % 10;
         p->vida += cura;
-        if (p->vida > p->vidaMaxima) p->vida = p->vidaMaxima;
+
+        if (p->vida > p->vidaMaxima)
+            p->vida = p->vidaMaxima;
+
         printf("Uma fonte antiga recupera sua vida (ate %d pontos).\n", cura);
+
     } else if (evento == 1) {
         p->pocoes++;
         printf("Voce encontrou uma pocao! Total: %d.\n", p->pocoes);
+
     } else {
         int dano = 5 + rand() % 8;
         p->vida -= dano;
-        if (p->vida < 1) p->vida = 1;
+
+        if (p->vida < 1)
+            p->vida = 1;
+
         printf("Uma armadilha causa %d de dano.\n", dano);
     }
 }
@@ -224,7 +269,12 @@ void jogar(Personagem *p, int etapa) {
         escolha = lerOpcao(1, 4);
 
         if (escolha == 1) {
-            explorar(p);
+            explorar(p, etapa);
+            	if (p->vida <= 0) {
+			    printf("Fim de jogo. Voce foi derrotado na etapa %d.\n", etapa);
+			    pausar();
+			    return;
+				}
             pausar();
         } else if (escolha == 2) {
             mostrarStatus(p);
