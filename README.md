@@ -7,6 +7,7 @@ RPG — SoulsMar
 2 - João Vitor S. Varini  
 3 - Matheus Marins  
 4 - Pedro A. Rangel
+5 - Guilherme Trepack
 
 1. Apresentação do projeto
 
