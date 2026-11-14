@@ -82,8 +82,7 @@ int main(int argc, char *argv[]){
             case 2:
           
             case 3:
-                exibirCreditos();
-                break;
+                
             case 0:
                 
         }
@@ -231,7 +230,7 @@ void loopExploracao(Personagem *p) {
 
         switch (opcao) {
             case 1:
-                
+                explorarAvancar(p);
                 break;
             case 2:
                 
@@ -248,6 +247,78 @@ void loopExploracao(Personagem *p) {
             case 0:
                 return;
         }
+    }
+}
+
+void explorarAvancar(Personagem *p) {
+    int escolha;
+    limparTela();
+
+    /*Evento da regiao */
+    if (p->progressoArea == 0) {
+        printf("=== EVENTO DA REGIAO %d ===\n\n", p->areaAtual);
+
+        if (p->areaAtual == 1) {
+            printf("Voce encontra um altar submerso emanando uma nevoa escarlate.\n");
+            printf("[1] Tocar o altar (-15 HP, +35 Almas e +1 Frasco)\n");
+            printf("[2] Ignorar e seguir (+15 Almas)\nEscolha: ");
+            scanf("%d", &escolha);
+            limparBuffer();
+
+            if (escolha == 1) {
+                p->hp -= 15;
+                if (p->hp < 1) p->hp = 1;
+                p->xp += 35;
+                adicionarItem(p, "Frasco de Estus", 1, 45, 1);
+                printf("\n>> A nevoa queima sua pele, mas voce ganha poder e um Frasco!\n");
+            } else {
+                p->xp += 15;
+                printf("\n>> Voce contorna o altar em seguranca.\n");
+            }
+        } else if (p->areaAtual == 2) {
+            printf("Um peregrino cego pede ajuda para suportar o frio da catedral.\n");
+            printf("[1] Ajudar o peregrino (+40 Almas e +2 Ataque)\n");
+            printf("[2] Seguir adiante (+15 Almas)\nEscolha: ");
+            scanf("%d", &escolha);
+            limparBuffer();
+
+            if (escolha == 1) {
+                p->xp += 40;
+                p->ataque += 2;
+                printf("\n>> O peregrino abencoa sua arma!\n");
+            } else {
+                p->xp += 15;
+                printf("\n>> Voce segue focado rumo ao altar.\n");
+            }
+        } else if (p->areaAtual == 3) {
+            printf("No topo do farol, uma reliquia antiga brilha cravada na pedra.\n");
+            printf("[1] Empunhar a reliquia (+50 Almas e +3 Defesa)\n");
+            printf("[2] Descansar um pouco (+20 HP)\nEscolha: ");
+            scanf("%d", &escolha);
+            limparBuffer();
+
+            if (escolha == 1) {
+                p->xp += 50;
+                p->defesa += 3;
+                printf("\n>> Uma armadura espectral envolve seus ombros!\n");
+            } else {
+                p->hp += 20;
+                if (p->hp > p->hpMax) p->hp = p->hpMax;
+                printf("\n>> Voce recupera suas energias.\n");
+            }
+        } else {
+            printf("Voce atravessa os portoes do Trono Abissal. Vorath aguarda!\n");
+        }
+
+        p->progressoArea = 1;
+        pausar();
+        return;
+    }
+
+    /*Luta contra o Guardiao da regiao ou boss final*/
+    Inimigo chefes[5] = {{"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, 
+	{"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}};
+
     }
 }
 
