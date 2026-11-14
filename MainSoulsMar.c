@@ -48,6 +48,8 @@ void exibirArteVitoria(void);
 void exibirArteDerrota(void);
 
 void criarPersonagem(Personagem *p);
+
+void loopExploracao(Personagem *p);
 //==================================================================================================
 int main(int argc, char *argv[]){
 
@@ -180,4 +182,55 @@ void criarPersonagem(Personagem *p) {
     printf("\nBem-vindo a SoulsMar, %s!\n", p->nome);
     printf("Seu objetivo: atravessar as 4 regioes e derrotar Vorath.\n");
     pausar();
+}
+//==================================================================================================
+void loopExploracao(Personagem *p) {
+    int opcao;
+    char *nomesAreas[] = {"", "1. Praia dos Naufragios", "2. Catedral Submersa", "3. Farol das Cinzas", "4. Trono Abissal de Vorath"};
+
+    while (p->hp > 0 && p->areaAtual <= 4) {
+        limparTela();
+        printf("==============================================================\n");
+        printf("  LOCALIZACAO: %s\n", nomesAreas[p->areaAtual]);
+        printf("  %s (Nv.%d) | HP: %d/%d | Vigor: %d/%d | Almas: %d/%d\n", p->nome, p->nivel, p->hp, p->hpMax, p->vigor, p->vigorMax, p->xp, p->xpProximoNivel);
+        printf("==============================================================\n\n");
+
+        if (p->progressoArea == 0) {
+            printf("Status da Regiao: Caminho desconhecido a frente.\n\n");
+        } else {
+            printf("Status da Regiao: O Guardiao desta area bloqueia a passagem!\n\n");
+        }
+
+        printf("  [1] Avancar na Jornada\n");
+        printf("  [2] Cacar Almas nos Arredores (Combate Livre)\n");
+        printf("  [3] Descansar na Fogueira (Curar, Subir Nivel e Salvar)\n");
+        printf("  [4] Abrir Inventario\n");
+        printf("  [5] Ver Status Completo\n");
+        printf("  [0] Voltar ao Menu Principal\n");
+        printf("\nO que deseja fazer? ");
+
+        opcao = lerInteiro(0, 5);
+
+        switch (opcao) {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 0:
+                return;
+        }
+    }
+
+    
 }
