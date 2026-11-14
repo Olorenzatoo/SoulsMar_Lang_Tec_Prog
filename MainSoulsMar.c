@@ -248,6 +248,12 @@ void loopExploracao(Personagem *p) {
                 return;
         }
     }
+
+	if (p->hp <= 0) {
+        limparTela();
+        printf("\n=== VOCE MORREU! SUAS ALMAS SE PERDERAM... ===\n");
+        pausar();
+    }
 }
 
 void explorarAvancar(Personagem *p) {
