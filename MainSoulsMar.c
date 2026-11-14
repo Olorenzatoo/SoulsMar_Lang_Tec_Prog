@@ -48,6 +48,7 @@ void exibirArteVitoria(void);
 void exibirArteDerrota(void);
 
 void criarPersonagem(Personagem *p);
+void exibirStatus(Personagem *p);
 
 void loopExploracao(Personagem *p);
 //==================================================================================================
@@ -75,6 +76,7 @@ int main(int argc, char *argv[]){
         switch (opcao) {
             case 1:
                 criarPersonagem(&jogador);
+				loopExploracao(&jogador);
 				break;
             case 2:
           
@@ -181,6 +183,20 @@ void criarPersonagem(Personagem *p) {
     limparTela();
     printf("\nBem-vindo a SoulsMar, %s!\n", p->nome);
     printf("Seu objetivo: atravessar as 4 regioes e derrotar Vorath.\n");
+    pausar();
+}
+
+void exibirStatus(const Personagem *p) {
+    limparTela();
+    printf("==============================================\n");
+    printf("  STATUS DE %s \n", p->nome);
+    printf("==============================================\n");
+    printf("  Nivel: %d  |  Almas (XP): %d / %d\n", p->nivel, p->xp, p->xpProximoNivel);
+    printf("  HP:    %d / %d\n", p->hp, p->hpMax);
+    printf("  Vigor: %d / %d\n", p->vigor, p->vigorMax);
+    printf("  Ataque: %d  |  Defesa: %d\n", p->ataque, p->defesa);
+    printf("  Regiao Atual: %d / 4\n", p->areaAtual);
+    printf("==============================================\n");
     pausar();
 }
 //==================================================================================================
