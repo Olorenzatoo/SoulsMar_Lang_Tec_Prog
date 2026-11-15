@@ -53,6 +53,7 @@ void verificarProgressao(Personagem *p);
 int iniciarCombate(Personagem *p, Inimigo inimigo);
 void loopExploracao(Personagem *p);
 void explorarAvancar(Personagem *p);
+void descansarFogueira(Personagem *p);
 void exibirCreditos(void);
 //==================================================================================================
 int main(int argc, char *argv[]){
@@ -343,7 +344,7 @@ void loopExploracao(Personagem *p) {
                 
                 break;
             case 3:
-                
+                descansarFogueira(p);
                 break;
             case 4:
                 abrirInventario(p);
