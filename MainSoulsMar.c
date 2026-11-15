@@ -46,6 +46,7 @@ int lerInteiro(int min, int max);
 void exibirArteFogueira(void);
 void exibirArteVitoria(void);
 void exibirArteDerrota(void);
+void exibirArteInimigo(int tipoArte);
 
 void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
@@ -53,6 +54,7 @@ void verificarProgressao(Personagem *p);
 int iniciarCombate(Personagem *p, Inimigo inimigo);
 void loopExploracao(Personagem *p);
 void explorarAvancar(Personagem *p);
+void cacarAlmas(Personagem *p);
 void descansarFogueira(Personagem *p);
 void exibirCreditos(void);
 //==================================================================================================
@@ -147,6 +149,24 @@ void exibirArteVitoria(void) {
     printf("    \\_/ |___| |_||_| |_|_| \\_\\___|/_/ \\_\\                     \n");
     printf("        A MALDICAO DE SOULSMAR FOI DISSIPADA!                 \n");
     printf("==============================================================\n");
+}
+
+void exibirArteInimigo(int tipoArte) {
+    if (tipoArte == 1) {
+        printf("\n        .-\"\"\"-.\n");
+        printf("       / _   _ \\\n");
+        printf("       ](_' '_)[\n");
+        printf("       `-. N .-'   [ ESPECTRO DA MARE ]\n");
+        printf("         |===|\n");
+        printf("        /     \\\n\n");
+    } else {
+        printf("\n       |\\     /|\n");
+        printf("       | \\___/ |\n");
+        printf("      /  O   O  \\\n");
+        printf("     |   ==^==   |  [ GUARDIAO ABISSAL ]\n");
+        printf("    /|\\  |===|  /|\\\n");
+        printf("   / | \\_/   \\_/ | \\\n\n");
+    }
 }
 
 void exibirArteDerrota(void) {
@@ -341,7 +361,7 @@ void loopExploracao(Personagem *p) {
                 explorarAvancar(p);
                 break;
             case 2:
-                
+                cacarAlmas(p);
                 break;
             case 3:
                 descansarFogueira(p);
@@ -432,6 +452,21 @@ void explorarAvancar(Personagem *p) {
 
 		
     }
+}
+
+void cacarAlmas(Personagem *p) {
+    Inimigo comum;
+    int escala = p->areaAtual;
+
+    strcpy(comum.nome, "Espectro da Mare");
+    comum.hpMax = 35 + (escala * 18);
+    comum.hp = comum.hpMax;
+    comum.ataque = 9 + (escala * 4);
+    comum.defesa = 3 + (escala * 2);
+    comum.xpRecompensa = 25 + (escala * 12);
+    comum.tipoArte = 1;
+
+    iniciarCombate(p, comum);
 }
 
 void descansarFogueira(Personagem *p) {
