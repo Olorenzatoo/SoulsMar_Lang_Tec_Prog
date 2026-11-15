@@ -48,6 +48,8 @@ void exibirArteVitoria(void);
 void exibirArteDerrota(void);
 void exibirArteInimigo(int tipoArte);
 
+int salvarJogo(Personagem *p);
+
 void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
 
@@ -183,6 +185,16 @@ void exibirArteDerrota(void) {
     printf("==============================================================\n");
 }
 //==================================================================================================
+int salvarJogo(Personagem *p) {
+    FILE *arquivo = fopen(SAVE_FILE, "wb");
+    if (arquivo == NULL) return 0;
+
+    fwrite(p, sizeof(Personagem), 1, arquivo);
+    fclose(arquivo);
+    return 1;
+}
+//==================================================================================================
+
 void criarPersonagem(Personagem *p) {
     limparTela();
     printf("=== CRIACAO DO PERSONAGEM ===\n\n");
