@@ -51,6 +51,8 @@ void exibirArteInimigo(int tipoArte);
 void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
 
+void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd);
+
 int iniciarCombate(Personagem *p, Inimigo inimigo);
 void loopExploracao(Personagem *p);
 void explorarAvancar(Personagem *p);
@@ -329,6 +331,25 @@ int iniciarCombate(Personagem *p, Inimigo inimigo) {
     return 0;
 }
 //==================================================================================================
+void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd) {
+    int i;
+    for (i = 0; i < p->numItens; i++) {
+        if (strcmp(p->inventario[i].nome, nome) == 0) {
+            p->inventario[i].quantidade += qtd;
+            return;
+        }
+    }
+    if (p->numItens < MAX_ITENS) {
+        strcpy(p->inventario[p->numItens].nome, nome);
+        p->inventario[p->numItens].tipo = tipo;
+        p->inventario[p->numItens].valor = valor;
+        p->inventario[p->numItens].quantidade = qtd;
+        p->numItens++;
+    }
+}
+
+
+//==================================================================================================
 void loopExploracao(Personagem *p) {
     int opcao;
     char *nomesAreas[] = {"", "1. Praia dos Naufragios", "2. Catedral Submersa", "3. Farol das Cinzas", "4. Trono Abissal de Vorath"};
@@ -465,6 +486,43 @@ void explorarAvancar(Personagem *p) {
             pausar();
         }
     }
+}
+    /*Luta contra o Guardiao da regiao ou boss final*/
+    Inimigo chefes[5] = {{"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, 
+	{"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}};
+
+	    if (iniciarCombate(p, chefes[p->areaAtual])) {
+        if (p->areaAtual == 4) {
+            limparTela();
+            exibirArteVitoria();
+            printf("\nParabens, %s! Voce concluiu a jornada no Nivel %d.\n", p->nome, p->nivel);
+            pausar();
+            p->areaAtual = 5;
+        } else {
+            p->areaAtual++;
+            p->progressoArea = 0;
+            printf("\n>> Guardiao derrotado! Voce avancou para a proxima regiao!\n");
+            pausar();
+        }
+    }
+}
+		
+    }
+}
+
+void cacarAlmas(Personagem *p) {
+    Inimigo comum;
+    int escala = p->areaAtual;
+
+    strcpy(comum.nome, "Espectro da Mare");
+    comum.hpMax = 35 + (escala * 18);
+    comum.hp = comum.hpMax;
+    comum.ataque = 9 + (escala * 4);
+    comum.defesa = 3 + (escala * 2);
+    comum.xpRecompensa = 25 + (escala * 12);
+    comum.tipoArte = 1;
+
+    iniciarCombate(p, comum);
 }
 
 void descansarFogueira(Personagem *p) {
