@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define MAX_ITENS 10
+#define SAVE_FILE "soulsmar_save.bin"
 
 typedef struct {
     char nome[40];
     int tipo;
-    int valor; 
+    int valor;
     int quantidade;
 } Item;
 
@@ -18,11 +20,11 @@ typedef struct {
     int xpProximoNivel;
     int hp;
     int hpMax;
-    int vigor; 
+    int vigor;
     int vigorMax;
     int ataque;
     int defesa;
-    int areaAtual; 
+    int areaAtual;
     int progressoArea;
     Item inventario[MAX_ITENS];
     int numItens;
@@ -53,6 +55,7 @@ int carregarJogo(Personagem *p);
 
 void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
+void exibirStatus(Personagem *p);
 
 void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd);
 void abrirInventario(Personagem *p);
@@ -63,44 +66,61 @@ void explorarAvancar(Personagem *p);
 void cacarAlmas(Personagem *p);
 void descansarFogueira(Personagem *p);
 void exibirCreditos(void);
-//==================================================================================================
-int main(int argc, char *argv[]){
 
+//==================================================================================================
+int main(int argc, char *argv[]) {
     Personagem jogador;
     int opcao;
 
-  do {
-		printf("==============================================================\n");
-	    printf("   ____   ___  _   _ _     ____  __  __    _    ____          \n");
-	    printf("  / ___| / _ \\| | | | |   / ___||  \\/  |  / \\  |  _ \\         \n");
-	    printf("  \\___ \\| | | | | | | |   \\___ \\| |\\/| | / _ \\ | |_) |        \n");
-	    printf("   ___) | |_| | |_| | |___ ___) | |  | |/ ___ \\|  _ <         \n");
-	    printf("  |____/ \\___/ \\___/|_____|____/|_|  |_/_/   \\_\\_| \\_\\        \n");
-	    printf("             --- AS COSTAS CINZENTAS DO ABISMO ---            \n");
-	    printf("==============================================================\n\n");
+    srand((unsigned int)time(NULL));
+
+    do {
+        limparTela();
+        printf("==============================================================\n");
+        printf("   ____   ___  _   _ _     ____  __  __    _    ____          \n");
+        printf("  / ___| / _ \\| | | | |   / ___||  \\/  |  / \\  |  _ \\         \n");
+        printf("  \\___ \\| | | | | | | |   \\___ \\| |\\/| | / _ \\ | |_) |        \n");
+        printf("   ___) | |_| | |_| | |___ ___) | |  | |/ ___ \\|  _ <         \n");
+        printf("  |____/ \\___/ \\___/|_____|____/|_|  |_/_/   \\_\\_| \\_\\        \n");
+        printf("             --- AS COSTAS CINZENTAS DO ABISMO ---            \n");
+        printf("==============================================================\n\n");
 
         printf("  [1] Nova Jornada (Novo Jogo)\n");
         printf("  [2] Continuar Jornada (Carregar Save)\n");
         printf("  [3] Sobre o Projeto & Creditos\n");
         printf("  [0] Sair\n");
         printf("\nEscolha uma opcao: ");
-    
+
+        opcao = lerInteiro(0, 3);
+
         switch (opcao) {
             case 1:
                 criarPersonagem(&jogador);
-				loopExploracao(&jogador);
-				break;
+                loopExploracao(&jogador);
+                break;
             case 2:
-          
+                if (carregarJogo(&jogador)) {
+                    limparTela();
+                    printf("\n>> Save carregado! Bem-vindo de volta, %s.\n", jogador.nome);
+                    pausar();
+                    loopExploracao(&jogador);
+                } else {
+                    printf("\n[!] Nenhum save encontrado.\n");
+                    pausar();
+                }
+                break;
             case 3:
-                
+                exibirCreditos();
+                break;
             case 0:
-                
+                printf("\nEncerrando SoulsMar...\n");
+                break;
         }
     } while (opcao != 0);
 
-  return 0;
+    return 0;
 }
+
 //==================================================================================================
 void limparTela(void) {
 #ifdef _WIN32
@@ -134,6 +154,7 @@ int lerInteiro(int min, int max) {
         printf("Entrada invalida! Digite um numero entre %d e %d: ", min, max);
     }
 }
+
 //==================================================================================================
 void exibirArteFogueira(void) {
     printf("\n        (  .      )\n");
@@ -185,6 +206,7 @@ void exibirArteDerrota(void) {
     printf("            SUAS ALMAS SE PERDERAM NAS PROFUNDEZAS...               \n");
     printf("==============================================================\n");
 }
+
 //==================================================================================================
 int salvarJogo(Personagem *p) {
     FILE *arquivo = fopen(SAVE_FILE, "wb");
@@ -203,8 +225,8 @@ int carregarJogo(Personagem *p) {
     fclose(arquivo);
     return (lidos == 1);
 }
-//==================================================================================================
 
+//==================================================================================================
 void criarPersonagem(Personagem *p) {
     limparTela();
     printf("=== CRIACAO DO PERSONAGEM ===\n\n");
@@ -268,10 +290,10 @@ void verificarProgressao(Personagem *p) {
     }
 }
 
-void exibirStatus(const Personagem *p) {
+void exibirStatus(Personagem *p) {
     limparTela();
     printf("==============================================\n");
-    printf("  STATUS DE %s \n", p->nome);
+    printf("  STATUS DE %s\n", p->nome);
     printf("==============================================\n");
     printf("  Nivel: %d  |  Almas (XP): %d / %d\n", p->nivel, p->xp, p->xpProximoNivel);
     printf("  HP:    %d / %d\n", p->hp, p->hpMax);
@@ -353,6 +375,7 @@ int iniciarCombate(Personagem *p, Inimigo inimigo) {
 
     return 0;
 }
+
 //==================================================================================================
 void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd) {
     int i;
@@ -417,16 +440,24 @@ void abrirInventario(Personagem *p) {
     }
     pausar();
 }
+
 //==================================================================================================
 void loopExploracao(Personagem *p) {
     int opcao;
-    char *nomesAreas[] = {"", "1. Praia dos Naufragios", "2. Catedral Submersa", "3. Farol das Cinzas", "4. Trono Abissal de Vorath"};
+    char *nomesAreas[] = {
+        "",
+        "1. Praia dos Naufragios",
+        "2. Catedral Submersa",
+        "3. Farol das Cinzas",
+        "4. Trono Abissal de Vorath"
+    };
 
     while (p->hp > 0 && p->areaAtual <= 4) {
         limparTela();
         printf("==============================================================\n");
         printf("  LOCALIZACAO: %s\n", nomesAreas[p->areaAtual]);
-        printf("  %s (Nv.%d) | HP: %d/%d | Vigor: %d/%d | Almas: %d/%d\n", p->nome, p->nivel, p->hp, p->hpMax, p->vigor, p->vigorMax, p->xp, p->xpProximoNivel);
+        printf("  %s (Nv.%d) | HP: %d/%d | Vigor: %d/%d | Almas: %d/%d\n",
+               p->nome, p->nivel, p->hp, p->hpMax, p->vigor, p->vigorMax, p->xp, p->xpProximoNivel);
         printf("==============================================================\n\n");
 
         if (p->progressoArea == 0) {
@@ -458,14 +489,17 @@ void loopExploracao(Personagem *p) {
             case 4:
                 abrirInventario(p);
                 break;
+            case 5:
+                exibirStatus(p);
+                break;
             case 0:
                 return;
         }
     }
 
-	if (p->hp <= 0) {
+    if (p->hp <= 0) {
         limparTela();
-        printf("\n=== VOCE MORREU! SUAS ALMAS SE PERDERAM... ===\n");
+        exibirArteDerrota();
         pausar();
     }
 }
@@ -537,7 +571,11 @@ void explorarAvancar(Personagem *p) {
 
     /* Luta contra o Guardiao da regiao ou boss final */
     Inimigo chefes[5] = {
-        {"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, {"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}
+        {"", 0, 0, 0, 0, 0, 2},
+        {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2},
+        {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2},
+        {"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2},
+        {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}
     };
 
     if (iniciarCombate(p, chefes[p->areaAtual])) {
@@ -553,28 +591,6 @@ void explorarAvancar(Personagem *p) {
             printf("\n>> Guardiao derrotado! Voce avancou para a proxima regiao!\n");
             pausar();
         }
-    }
-}
-    /*Luta contra o Guardiao da regiao ou boss final*/
-    Inimigo chefes[5] = {{"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, 
-	{"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}};
-
-	    if (iniciarCombate(p, chefes[p->areaAtual])) {
-        if (p->areaAtual == 4) {
-            limparTela();
-            exibirArteVitoria();
-            printf("\nParabens, %s! Voce concluiu a jornada no Nivel %d.\n", p->nome, p->nivel);
-            pausar();
-            p->areaAtual = 5;
-        } else {
-            p->areaAtual++;
-            p->progressoArea = 0;
-            printf("\n>> Guardiao derrotado! Voce avancou para a proxima regiao!\n");
-            pausar();
-        }
-    }
-}
-		
     }
 }
 
