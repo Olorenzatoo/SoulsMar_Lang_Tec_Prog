@@ -49,6 +49,7 @@ void exibirArteDerrota(void);
 void exibirArteInimigo(int tipoArte);
 
 int salvarJogo(Personagem *p);
+int carregarJogo(Personagem *p);
 
 void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
@@ -192,6 +193,15 @@ int salvarJogo(Personagem *p) {
     fwrite(p, sizeof(Personagem), 1, arquivo);
     fclose(arquivo);
     return 1;
+}
+
+int carregarJogo(Personagem *p) {
+    FILE *arquivo = fopen(SAVE_FILE, "rb");
+    if (arquivo == NULL) return 0;
+
+    size_t lidos = fread(p, sizeof(Personagem), 1, arquivo);
+    fclose(arquivo);
+    return (lidos == 1);
 }
 //==================================================================================================
 
