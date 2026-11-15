@@ -385,14 +385,14 @@ void explorarAvancar(Personagem *p) {
     int escolha;
     limparTela();
 
-    /*Evento da regiao */
+    /* Evento da regiao */
     if (p->progressoArea == 0) {
         printf("=== EVENTO DA REGIAO %d ===\n\n", p->areaAtual);
 
         if (p->areaAtual == 1) {
             printf("Voce encontra um altar submerso emanando uma nevoa escarlate.\n");
-            printf("[1] Tocar o altar\n");
-            printf("[2] Ignorar e seguir\nEscolha: ");
+            printf("[1] Tocar o altar (-15 HP, +35 Almas e +1 Frasco)\n");
+            printf("[2] Ignorar e seguir (+15 Almas)\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -408,8 +408,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 2) {
             printf("Um peregrino cego pede ajuda para suportar o frio da catedral.\n");
-            printf("[1] Ajudar o peregrino\n");
-            printf("[2] Seguir adiante\nEscolha: ");
+            printf("[1] Ajudar o peregrino (+40 Almas e +2 Ataque)\n");
+            printf("[2] Seguir adiante (+15 Almas)\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -423,8 +423,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 3) {
             printf("No topo do farol, uma reliquia antiga brilha cravada na pedra.\n");
-            printf("[1] Empunhar a reliquia\n");
-            printf("[2] Descansar um pouco\nEscolha: ");
+            printf("[1] Empunhar a reliquia (+50 Almas e +3 Defesa)\n");
+            printf("[2] Descansar um pouco (+20 HP)\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -446,27 +446,25 @@ void explorarAvancar(Personagem *p) {
         return;
     }
 
-    /*Luta contra o Guardiao da regiao ou boss final*/
-    Inimigo chefes[5] = {{"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, 
-	{"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}};
+    /* Luta contra o Guardiao da regiao ou boss final */
+    Inimigo chefes[5] = {
+        {"", 0, 0, 0, 0, 0, 2}, {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2}, {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2}, {"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2}, {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}
+    };
 
-		
+    if (iniciarCombate(p, chefes[p->areaAtual])) {
+        if (p->areaAtual == 4) {
+            limparTela();
+            exibirArteVitoria();
+            printf("\nParabens, %s! Voce concluiu a jornada no Nivel %d.\n", p->nome, p->nivel);
+            pausar();
+            p->areaAtual = 5;
+        } else {
+            p->areaAtual++;
+            p->progressoArea = 0;
+            printf("\n>> Guardiao derrotado! Voce avancou para a proxima regiao!\n");
+            pausar();
+        }
     }
-}
-
-void cacarAlmas(Personagem *p) {
-    Inimigo comum;
-    int escala = p->areaAtual;
-
-    strcpy(comum.nome, "Espectro da Mare");
-    comum.hpMax = 35 + (escala * 18);
-    comum.hp = comum.hpMax;
-    comum.ataque = 9 + (escala * 4);
-    comum.defesa = 3 + (escala * 2);
-    comum.xpRecompensa = 25 + (escala * 12);
-    comum.tipoArte = 1;
-
-    iniciarCombate(p, comum);
 }
 
 void descansarFogueira(Personagem *p) {
