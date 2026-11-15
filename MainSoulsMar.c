@@ -52,6 +52,7 @@ void criarPersonagem(Personagem *p);
 void verificarProgressao(Personagem *p);
 
 void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd);
+void abrirInventario(Personagem *p);
 
 int iniciarCombate(Personagem *p, Inimigo inimigo);
 void loopExploracao(Personagem *p);
@@ -348,7 +349,52 @@ void adicionarItem(Personagem *p, char *nome, int tipo, int valor, int qtd) {
     }
 }
 
+void abrirInventario(Personagem *p) {
+    int i, j, escolha;
 
+    limparTela();
+    printf("=== INVENTARIO DE %s ===\n\n", p->nome);
+
+    if (p->numItens == 0) {
+        printf("Sua bolsa esta vazia.\n");
+        pausar();
+        return;
+    }
+
+    for (i = 0; i < p->numItens; i++) {
+        printf("  [%d] %s (x%d) - ", i + 1, p->inventario[i].nome, p->inventario[i].quantidade);
+        if (p->inventario[i].tipo == 1) {
+            printf("Recupera %d de HP\n", p->inventario[i].valor);
+        } else {
+            printf("Recupera %d de Vigor\n", p->inventario[i].valor);
+        }
+    }
+    printf("  [0] Fechar inventario\n");
+    printf("\nEscolha um item para usar: ");
+
+    escolha = lerInteiro(0, p->numItens);
+    if (escolha == 0) return;
+
+    i = escolha - 1;
+    if (p->inventario[i].tipo == 1) {
+        p->hp += p->inventario[i].valor;
+        if (p->hp > p->hpMax) p->hp = p->hpMax;
+        printf("\n>> Voce usou %s! HP atual: %d/%d.\n", p->inventario[i].nome, p->hp, p->hpMax);
+    } else {
+        p->vigor += p->inventario[i].valor;
+        if (p->vigor > p->vigorMax) p->vigor = p->vigorMax;
+        printf("\n>> Voce usou %s! Vigor atual: %d/%d.\n", p->inventario[i].nome, p->vigor, p->vigorMax);
+    }
+
+    p->inventario[i].quantidade--;
+    if (p->inventario[i].quantidade <= 0) {
+        for (j = i; j < p->numItens - 1; j++) {
+            p->inventario[j] = p->inventario[j + 1];
+        }
+        p->numItens--;
+    }
+    pausar();
+}
 //==================================================================================================
 void loopExploracao(Personagem *p) {
     int opcao;
