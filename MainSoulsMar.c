@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include <windows.h>
 
 #define MAX_ITENS 10
 #define SAVE_FILE "soulsmar_save.bin"
@@ -72,7 +72,7 @@ int main(int argc, char *argv[]) {
     Personagem jogador;
     int opcao;
 
-    srand((unsigned int)time(NULL));
+    srand((unsigned int)GetTickCount());
 
     do {
         limparTela();
@@ -157,15 +157,37 @@ int lerInteiro(int min, int max) {
 
 //==================================================================================================
 void exibirArteFogueira(void) {
-    printf("\n        (  .      )\n");
-    printf("      )           (              )\n");
-    printf("            .  '   .   '  .  '  .\n");
-    printf("   (    , )       (.   )  (   ',    )\n");
-    printf("    .' ) ( . )    ,  ( ,     )   ( .\n");
-    printf(" ). , ( .   (  ) ( , ')  .' (  ,    )\n");
-    printf("(_,) . ), ) _) _,')  (, ) '. )  ,. (' )\n");
-    printf("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
-    printf("     [ FOGUEIRA DAS ALMAS ACESA ]\n\n");
+	printf("                                    .                             \n");
+	printf("                                   `.\\\\                           \n");
+	printf("                                   ``\\\\\\                          \n");
+	printf("                              .    ``*\\\\                          \n");
+	printf("                             /.\\  ///*```                         \n");
+	printf("                            ///\\`///***``/.\\                      \n");
+	printf("                            //*\\\\//*.*`` `/\\\\                     \n");
+	printf("                         ..//***..*/\\\\`` //*\\`                    \n");
+	printf("                     .  //./*****///`*/ //#*``                    \n");
+	printf("                    /.\\ ``***//\\#// ```//#.=``                    \n");
+	printf("                   `/\\` ``***`/\\./ ``\\./#/\\```                    \n");
+	printf("                   ``*\\\\``...`` .  `\\*##/ ````                    \n");
+	printf("                   ``#\\\\.=/\\.\\*`.    \\\\\\// ```` ..                 \n");
+	printf("                   ``#*#\\// \\./      \\\\/  ````//\\`                \n");
+	printf("                `.\\``***//   .   .        \\\\*\\//``                \n");
+	printf("                `/\\.`**//       `.\\\\       \\\\..#\\\\\\               \n");
+	printf("                //#`\\\\//        ``\\\\..     \\\\\\*##\\\\\\              \n");
+	printf("               ``*//\\\\``     /.\\/`#\\..\\     ``#/.#\\\\\\             \n");
+	printf("              .//#`` \\*`    //..//##*\\\\\\     `./\\`*\\\\             \n");
+	printf("              `/*#`` \\\\=   .//#*###*##\\\\.. ..-...``\\\\\\            \n");
+	printf("       .......``**\\\\     /../*#*#*####`\\.\\.... .``##``            \n");
+	printf("      `/....../`#*\\\\.\\.. .``**####%%###%%\\.#``..  ///##`\\.....       \n");
+	printf("      ``=/@#*+-=\\@%%#\\\\...``###.....#####//`  .////%%#\\\\....\\`      \n");
+	printf("      `\\-%%*#+++:\\...:=+=..-\\.==-....\\@#`/.../.-`\\.%%@@`==*+``      \n");
+	printf("       \\\\....*:*:++:*=::=#---=+.==---\\.#\\.+=-%%:=...\\%%`==+//`      \n");
+	printf("        ....\\.\\+=:=:::::\\=-%%--*%%#=-#-==+@.\\:+-#=+-:\\./...//       \n");
+	printf("              \\\\...=*/  \\\\-+#=-..++-=+=.../=-:==-=:.......        \n");
+	printf("               ....../   \\\\.................\\....//.              \n");
+	printf("                          ............      \\.....                \n");
+
+    printf("                    [ FOGUEIRA DAS ALMAS ACESA ]\n\n");
 }
 
 void exibirArteVitoria(void) {
@@ -514,8 +536,8 @@ void explorarAvancar(Personagem *p) {
 
         if (p->areaAtual == 1) {
             printf("Voce encontra um altar submerso emanando uma nevoa escarlate.\n");
-            printf("[1] Tocar o altar (-15 HP, +35 Almas e +1 Frasco)\n");
-            printf("[2] Ignorar e seguir (+15 Almas)\nEscolha: ");
+            printf("[1] Tocar o altar\n");
+            printf("[2] Ignorar e seguir\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -531,8 +553,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 2) {
             printf("Um peregrino cego pede ajuda para suportar o frio da catedral.\n");
-            printf("[1] Ajudar o peregrino (+40 Almas e +2 Ataque)\n");
-            printf("[2] Seguir adiante (+15 Almas)\nEscolha: ");
+            printf("[1] Ajudar o peregrino\n");
+            printf("[2] Seguir adiante\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
@@ -546,8 +568,8 @@ void explorarAvancar(Personagem *p) {
             }
         } else if (p->areaAtual == 3) {
             printf("No topo do farol, uma reliquia antiga brilha cravada na pedra.\n");
-            printf("[1] Empunhar a reliquia (+50 Almas e +3 Defesa)\n");
-            printf("[2] Descansar um pouco (+20 HP)\nEscolha: ");
+            printf("[1] Empunhar a reliquia\n");
+            printf("[2] Descansar um pouco\nEscolha: ");
             scanf("%d", &escolha);
             limparBuffer();
 
