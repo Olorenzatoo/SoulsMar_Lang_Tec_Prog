@@ -202,19 +202,126 @@ void exibirArteVitoria(void) {
 
 void exibirArteInimigo(int tipoArte) {
     if (tipoArte == 1) {
-        printf("\n        .-\"\"\"-.\n");
-        printf("       / _   _ \\\n");
-        printf("       ](_' '_)[\n");
-        printf("       `-. N .-'   [ ESPECTRO DA MARE ]\n");
-        printf("         |===|\n");
-        printf("        /     \\\n\n");
+        printf("                  .-----.                  \n");
+        printf("                .'       '.                \n");
+        printf("               /   .-. .-. \\               \n");
+        printf("              |   ( * ) ( * )              \n");
+        printf("              |    '-' '-'  |              \n");
+        printf("              |     .---.   |              \n");
+        printf("             /     /#####\\   \\             \n");
+        printf("            /     |#######|   \\            \n");
+        printf("           /   .  |###%%###| .  \\           \n");
+        printf("          /   /|  |#######| |\\  \\          \n");
+        printf("         /   / |  \\#######/ | \\  \\         \n");
+        printf("        `---'  |   '#####'  |  '---'       \n");
+        printf("               |    /###\\   |              \n");
+        printf("                \\  /#####\\ /               \n");
+        printf("                 \\/###*###\\/                \n");
+        printf("                  \\##*#*##/                 \n");
+        printf("                   \\#*#*#/                  \n");
+        printf("                    \\###/                   \n");
+        printf("                     \\#/                    \n");
+        printf("                      `                     \n");
+        printf("          [ ESPECTRO DAS BRUMAS ]\n\n");
+    } else if (tipoArte == 2) {
+        printf("                  .-.                  \n");
+        printf("                 (o.o)                 \n");
+        printf("                  |=|                  \n");
+        printf("                 __|__                 \n");
+        printf("               //.=|=.\\\\               \n");
+        printf("              // .=|=. \\\\              \n");
+        printf("              \\\\ .=|=. //              \n");
+        printf("               \\\\(_=_)//               \n");
+        printf("                (:| |:)                \n");
+        printf("                 || ||                 \n");
+        printf("                 () ()                 \n");
+        printf("                 || ||                 \n");
+        printf("                 || ||                 \n");
+        printf("                ==' '==                \n");
+        printf("      [ ESQUELETO DE SOULSMAR ]\n\n");
+    } else if (tipoArte == 3) {
+        printf("                      |\\   /\\   /|                      \n");
+        printf("                      | \\_/  \\_/ |                      \n");
+        printf("                      |##########|                      \n");
+        printf("                     .'  _    _  '.                     \n");
+        printf("                    /   (@)  (@)   \\                    \n");
+        printf("                   |      .--.      |                   \n");
+        printf("                   |     /####\\     |                   \n");
+        printf("                  .-'====\\######/===='-.                 \n");
+        printf("                .'   _.-'########'-._   '.               \n");
+        printf("               /   .'  /##########\\  '.   \\              \n");
+        printf("              /   /   /####%%%%####\\   \\   \\             \n");
+        printf("             |   |   |####%%%%@@%%%%####|   |   |            \n");
+        printf("             |   |   |###%%%%@**@%%%%###|   |   |            \n");
+        printf("             |   |    \\###%%%%@@%%%%###/    |   |            \n");
+        printf("             |   |     '##########'     |   |            \n");
+        printf("             |   |    .-'########'-.    |   |            \n");
+        printf("             |   |   /  /########\\  \\   |   |            \n");
+        printf("             '._.'  /  /##########\\  \\  '._.'            \n");
+        printf("               |   /  /####****####\\  \\                  \n");
+        printf("             __|__/  /####******####\\  \\                 \n");
+        printf("            [=====] |######****######|                   \n");
+        printf("               |    |#####/    \\#####|                   \n");
+        printf("               |    |####/      \\####|                   \n");
+        printf("               |    |###/        \\###|                   \n");
+        printf("               |   _/#/          \\#_                    \n");
+        printf("               V  /###/            \\###\\                   \n");
+        printf("                 [ BOSS: REI CAIDO ]\n\n");
+    } else if (tipoArte == 4) {
+        printf("      |\\                                            /|      \n");
+        printf("      | \\                  _   _                   / |      \n");
+        printf("      |  \\                .' \\_/ '.                /  |      \n");
+        printf("      |   \\              /  /###\\  \\              /   |      \n");
+        printf("      |    \\            |  |(@ @)|  |            /    |      \n");
+        printf("      | |\\ \\          |   \\###/   |          / /|  |      \n");
+        printf("      | | \\ \\        .-'==\\#####/=='-.        / / |  |      \n");
+        printf("      | |  \\ \\    .'   _.-'###'-._   '.    / /  |  |      \n");
+        printf("      | |   \\ \\  /   .'  /#####\\  '.   \\  / /   |  |      \n");
+        printf("      | |    \\ \\/   /   /###%%###\\   \\   \\/ /    |  |      \n");
+        printf("      | |     \\    |   |###%%%###|   	|    /     |  |      \n");
+        printf("       \\ \\     \\   |   |##%%@%%##|   |   /     / /       \n");
+        printf("        \\ \\     \\  |    \\##%%%##/    |  /     / /        \n");
+        printf("         \\ \\     \\ |     '#####'     | /     / /         \n");
+        printf("          \\ \\     \\|    .-'###'-.    |/     / /          \n");
+        printf("           \\ \\     '   /  /###\\  \\   '     / /           \n");
+        printf("            \\ \\       /  /#####\\  \\       / /            \n");
+        printf("             \\ \\     /  /#######\\  \\     / /             \n");
+        printf("              \\ \\   /__/####*####\\__\\   / /              \n");
+        printf("               \\ \\     |#####*#####|     / /               \n");
+        printf("                \\ \\    |####/ \\####|    / /                \n");
+        printf("                 \\_\\   |###/   \\###|   /_/                 \n");
+        printf("                         |##/     \\##|                       \n");
+        printf("                        _/#/       \\#_                      \n");
+        printf("                       /###/         \\###\\                     \n");
+        printf("                [ BOSS: SENHOR DAS CINZAS ]\n\n");
     } else {
-        printf("\n       |\\     /|\n");
-        printf("       | \\___/ |\n");
-        printf("      /  O   O  \\\n");
-        printf("     |   ==^==   |  [ GUARDIAO ABISSAL ]\n");
-        printf("    /|\\  |===|  /|\\\n");
-        printf("   / | \\_/   \\_/ | \\\n\n");
+        printf("                        /\\                                 \n");
+        printf("                       /  \\      _.-._                     \n");
+        printf("                      / /\\ \\    .'  _  '.                   \n");
+        printf("                     / /  \\ \\ /   / \\   \\                  \n");
+        printf("                    / /    \\ \\|  |(@)|  |                  \n");
+        printf("                   / /      \\ \\\\  \\_/  //                  \n");
+        printf("                  / /      .-'==\\#####/=='-.               \n");
+        printf("                 / /      .'   _.-'###'-._   '.             \n");
+        printf("                / /      /   .'  /#####\\  '.   \\            \n");
+        printf("               / /      /   /   /#######\\   \\   \\           \n");
+        printf("              / /      |   |   |###%%%###|   |   |          \n");
+        printf("             / /       |   |   |##%%@%%##|   |   |          \n");
+        printf("            / /        |   |    \\##%%%##/    |   |          \n");
+        printf("           / /         |   |     '#####'     |   |          \n");
+        printf("          / /          |   |    .-'###'-.    |   |          \n");
+        printf("         / /           |   |   /  /###\\  \\   |   |          \n");
+        printf("        / /            |   |  /  /#####\\  \\  |   |          \n");
+        printf("       / /             '._.' /  /#######\\  \\ '._.'          \n");
+        printf("      / /                   /  /####*####\\  \\               \n");
+        printf("     / /                   /__/####***####\\__\\              \n");
+        printf("    / /                      |#####***#####|                \n");
+        printf("   / /                       |####/   \\####|                \n");
+        printf("  /_/                        |###/     \\###|                \n");
+        printf("                             |##/       \\##|                \n");
+        printf("                            _/#/         \\#_               \n");
+        printf("                           /###/           \\###\\              \n");
+        printf("                   [ BOSS: IMPERADOR DE VORATH ]\n\n");
     }
 }
 
@@ -593,11 +700,11 @@ void explorarAvancar(Personagem *p) {
 
     /* Luta contra o Guardiao da regiao ou boss final */
     Inimigo chefes[5] = {
-        {"", 0, 0, 0, 0, 0, 2},
-        {"Carcereiro dos Naufragios", 75, 75, 14, 6, 60, 2},
-        {"Bispo das Profundezas", 110, 110, 19, 9, 95, 2},
-        {"Sentinela do Farol Cinzento", 145, 145, 24, 12, 140, 2},
-        {"VORATH, O SOBERANO DO ABISMO", 210, 210, 30, 15, 500, 2}
+        {"", 0, 0, 0, 0, 0, 0},
+        {"ESQUELETO DE SOULSMAR", 75, 75, 14, 6, 60, 2},
+        {"REI CAIDO", 110, 110, 19, 9, 95, 3},
+        {"SENHOR DAS CINZAS", 145, 145, 24, 12, 140, 4},
+        {"IMPERADOR DE VORATH", 210, 210, 30, 15, 500, 5}
     };
 
     if (iniciarCombate(p, chefes[p->areaAtual])) {
