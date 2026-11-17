@@ -3,10 +3,10 @@ Trabalho de Linguagem Técnica — RPG baseado em texto
 
 RPG — SoulsMar
                            
-1 - Henrique L. Santana   
-2 - João Vitor S. Varini  
-3 - Matheus Marins  
-4 - Pedro A. Rangel
+- 1 - Henrique L. Santana   
+- 2 - João Vitor S. Varini  
+- 3 - Matheus Marins  
+- 4 - Pedro A. Rangel
 - 5 - Guilherme Trepack
 
 1. Apresentação do projeto
